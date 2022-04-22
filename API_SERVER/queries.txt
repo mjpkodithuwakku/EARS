@@ -1,0 +1,30 @@
+mysql> CREATE TABLE products(
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+sku VARCHAR(20),
+name VARCHAR(40), 
+price INT(20), 
+date DATE,
+location VARCHAR(40),
+brand VARCHAR(20),
+model VARCHAR(40), 
+edition VARCHAR(20),
+color VARCHAR(20),
+vcondition VARCHAR(20),
+bodytype VARCHAR(20), 
+enginecapacity INT(11), 
+yom INT(11), 
+transmission VARCHAR(20), 
+fueltype VARCHAR(20), 
+mileage INT(11),
+description VARCHAR(200), 
+seller INT(11),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+active INT(2) 
+)ENGINE=INNODB;
+
+
+ALTER TABLE products
+ADD COLUMN active INT(2) AFTER created_at;
+
+ALTER TABLE products RENAME COLUMN transmision TO transmission;
+ALTER TABLE products CHANGE transmision transmission varchar(20);

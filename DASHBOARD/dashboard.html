@@ -1,0 +1,404 @@
+﻿<!--
+=========================================================
+* Soft UI Dashboard - v1.0.3
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>
+    Facial Emotion Analytics
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link type="text/css"href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link type="text/css" href="assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link type="text/css" href="assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" type="text/css" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+ 
+    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Meeting</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+                            ID:12132434
+                        </li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Meeting Analytics</h6>
+                </nav>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Attention Level</p>
+                                        <!--h5 class="font-weight-bolder mb-0 text-success" id="spo2" style="font-size:x-large">
+                                            0
+                                        </h5-->
+                                        <div style="width:100%;">
+                                        
+                                          <canvas id="attentionCanvasDisplay"class="chart-canvas" height="50" width="100" style="display: block; box-sizing: border-box; height: 50px; width: 100px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <!--h5 class="font-weight-bolder mb-0 text-success" id="spo2" style="font-size:3rem; text-align: center;">
+                                        0
+                                    </h5-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Average Attention</p>
+                                        <!--h5 class="font-weight-bolder mb-0 text-danger" id="hr" style="font-size: x-large;">
+                                            0
+                                        </h5-->
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <!--h5 class="font-weight-bolder mb-0 text-success" id="hr" style="font-size:3rem; text-align: center;">
+                                        0
+                                    </h5-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid py-4">
+            <div class="row mt-4">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="card z-index-2">
+                        <div class="card-body p-3">
+                            <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3" style="background-image: linear-gradient(
+                310deg
+                , #ffffff 0%, #fcffff 100%);">
+                                <h6 class="ms-2 mt-4 mb-0"> Blood Oxygen Level & Heart Rate </h6>
+                                <p class="text-sm ms-2">  Realtime </p>
+                                <div style="width:100%;">
+                                    <canvas id="mycanvas" class="chart-canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <div class="card z-index-2">
+                        <div class="card-body p-3">
+                            <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3" style="background-image: linear-gradient(
+                310deg
+                , #ffffff 0%, #fcffff 100%);">
+                                <h6 class="ms-2 mt-4 mb-0"> Body Temperature </h6>
+                                <p class="text-sm ms-2">  Realtime </p>
+                                <div style="width:100%;">
+                                    <canvas id="mycanvas2" class="chart-canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-6">
+              <div class="card z-index-2">
+                <div class="card-header pb-0">
+                  <h6>Sales overview</h6>
+                  <p class="text-sm">
+                    <i class="fa fa-arrow-up text-success"></i>
+                    <span class="font-weight-bold">4% more</span> in 2021
+                  </p>
+                </div>
+                <div class="card-body p-3">
+                  <div class="chart">
+                    <canvas id="mycanvas" class="chart-canvas" ></canvas>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            </div>
+        </div>
+    </main>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+ 
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
+  <script>
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }  
+    
+    // create display attention chart
+    var ctx_attention = document.getElementById("attentionCanvasDisplay");
+
+    var myChart = new Chart(ctx_attention, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          data: [],
+          borderColor:'#3A416F',
+          borderWidth: 3,
+          backgroundColor: "rgb(	30,144,255,0.2)",
+          label: 'IR',
+          fill: true,
+        },
+        {data: [],
+          borderWidth: 3,
+          borderColor:'rgb(196,88,80)',
+          backgroundColor: "rgb(196,88,80,0.2)",
+          // backgroundColor: gradientStroke2,
+          label: 'RED',
+          fill: true 
+        }
+
+      ]},
+  
+      options: {
+        responsive: true,
+        title: {
+          display: false,
+        },
+        legend: {
+          display: true
+        },
+        scales: {
+          y: {
+              suggestedMin: 0,
+              suggestedMax: 50
+          }
+        },
+        elements: {
+          line: {
+              tension: 0.3, // disables bezier curves
+          },
+          point:{
+              radius: 0
+          }
+        }
+      }
+    });
+
+    // create initial empty chart
+    var ctx_live = document.getElementById("mycanvas");
+
+    var myChart = new Chart(ctx_live, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          data: [],
+          borderColor:'#3A416F',
+          borderWidth: 3,
+          backgroundColor: "rgb(	30,144,255,0.2)",
+          label: 'IR',
+          fill: true,
+        },
+        {data: [],
+          borderWidth: 3,
+          borderColor:'rgb(196,88,80)',
+          backgroundColor: "rgb(196,88,80,0.2)",
+          // backgroundColor: gradientStroke2,
+          label: 'RED',
+          fill: true 
+        }
+
+      ]},
+  
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+        },
+        legend: {
+          display: false
+        },
+        scales: {
+          y: {
+              suggestedMin: 0,
+              suggestedMax: 50
+          }
+        },
+        elements: {
+          line: {
+              tension: 0.3, // disables bezier curves
+          },
+          point:{
+              radius: 0
+          }
+        }
+      }
+    });
+    
+    // this post id drives the example data
+    var postId = 1;
+    
+    // logic to get new data
+
+    const winSize = 2000;
+
+    var getData = function() {
+      $.ajax({
+        url: 'http://93.188.166.97:3000/Readings/N/'+ winSize,
+        success: function(data) {
+          
+          var minData = data[0].red;
+
+          for (var i=0; i < winSize; i++) {  
+              myChart.data.labels[i] = data[i].id;
+            myChart.data.datasets[0].data[i] = data[i].red;
+            myChart.data.datasets[1].data[i] = data[i].ir; 
+            if(minData >  data[0].red){
+		minData  = data[0].red;
+	   }
+	   if(minData >  data[0].ir){
+		minData  = data[0].ir;
+	   }
+
+            
+          }
+	myChart.options.scales.y.suggestedMin = minData;
+	myChart.update();  
+          
+        }
+      });
+    };
+    
+    // get new data every 3 seconds
+    setInterval(getData, 30);
+
+  </script>
+
+<script>
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  // create initial empty chart
+  var ctx_live_2 = document.getElementById("mycanvas2");
+  const labels2 = ['a','b','c','d','e','f','g'];
+  var myChart_2 = new Chart(ctx_live_2, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        data: [],
+        borderWidth: 3,
+        borderColor:'#B8860B',
+        backgroundColor: "rgb(205,133,63,0.2)",
+        label: 'Temperature',
+        borderCapStyle: 'squre',
+        fill: true 
+      }
+    ]},
+    options: {
+      responsive: true,
+      title: {
+        display: true,
+        text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+      },
+      legend: {
+        display: false
+      },
+      scales: {
+        y: {
+            suggestedMin: 0,
+            suggestedMax: 50
+        }
+      },
+      elements: {
+        line: {
+            tension: 0.3 // disables bezier curves
+        },
+        point:{
+            radius: 0
+        }
+      }
+    }
+  });
+  
+  // this post id drives the example data
+  var postId = 1;
+  
+  // logic to get new data
+  var getDataTemperature = function() {
+    $.ajax({
+      url: 'http://93.188.166.97:3000/Vitalsigns/N/15',
+      success: function(data) {
+        
+        for (var i=0; i < 14; i++) {  
+          myChart_2.data.labels[i]  = i;
+          //myChart_2.data.datasets[0].data[i] = data[i].temperature;
+
+          //myChart_2.data.labels[i]  = data[i].id;
+          myChart_2.data.datasets[0].data[i] = getRandomIntInclusive(36.0,37.5);
+          myChart_2.update();
+          //$('h5#spo2').text(data[i].spo2);
+          //$('h5#hr').text(data[i].hr);
+	$('h5#spo2').text(98);
+          $('h5#hr').text(75);
+
+        }
+        
+      }
+    });
+  };
+  
+  // get new data every 3 seconds
+  setInterval(getDataTemperature, 30);
+
+</script>
+</body>
+
+</html>

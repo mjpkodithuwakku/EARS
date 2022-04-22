@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chart.js Redraw Example</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+  </head>
+  <body>
+    <div style="width:50%;">
+        <canvas id="mycanvas"></canvas>
+    </div>
+    <div style="width:50%;">
+      <canvas id="mycanvas2"></canvas>
+    </div>
+    
+    <script>
+      function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      
+      // create initial empty chart
+      var ctx_live = document.getElementById("mycanvas");
+      const labels = ['a','b','c','d','e','f','g'];
+      var myChart = new Chart(ctx_live, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            data: [],
+            borderWidth: 1,
+            borderColor:'#008000',
+            label: 'SpO2',
+            borderCapStyle: 'squre',
+            fill: true 
+          },
+          {data: [],
+            borderWidth: 1,
+            borderColor:'rgb(196,88,80)',
+            backgroundColor: "rgb(196,88,80,0.1)",
+            label: 'HR',
+            borderCapStyle: 'squre',
+            fill: true 
+          }
+
+        ]},
+    
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+          },
+          legend: {
+            display: false
+          },
+          scales: {
+            y: {
+                suggestedMin: 50,
+                suggestedMax: 120
+            }
+          },
+          elements: {
+            line: {
+                tension: 0.3 // disables bezier curves
+            },
+            point:{
+                radius: 0
+            }
+          }
+        }
+      });
+      
+      // this post id drives the example data
+      var postId = 1;
+      
+      // logic to get new data
+      var getData = function() {
+        $.ajax({
+          url: 'http://93.188.166.97:3000/readings/N/15',
+          success: function(data) {
+            
+            for (var i=0; i < 14; i++) {  
+              myChart.data.labels[i]  = data[i].id;
+              myChart.data.datasets[0].data[i] = data[i].red;
+              myChart.data.datasets[1].data[i] = data[i].ir; 
+              myChart.update();  
+            }
+            
+          }
+        });
+      };
+      
+      // get new data every 3 seconds
+      setInterval(getData, 30);
+
+    </script>
+
+  <script>
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    // create initial empty chart
+    var ctx_live_2 = document.getElementById("mycanvas2");
+    const labels2 = ['a','b','c','d','e','f','g'];
+    var myChart_2 = new Chart(ctx_live_2, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          data: [],
+          borderWidth: 1,
+          borderColor:'rgb(196,88,80)',
+          backgroundColor: "rgb(196,88,80,0.1)",
+          label: 'temperature',
+          borderCapStyle: 'squre',
+          fill: true 
+        }
+      ]},
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+        },
+        legend: {
+          display: false
+        },
+        // scales: {
+        //   yAxes: [{
+        //     ticks: {
+        //       beginAtZero: true,
+        //     }
+        //   }]
+        // },
+        scales: {
+          y: {
+              suggestedMin: 0,
+              suggestedMax: 50
+          }
+        },
+        elements: {
+          line: {
+              tension: 0.3 // disables bezier curves
+          },
+          point:{
+              radius: 0
+          }
+        }
+      }
+    });
+    
+    // this post id drives the example data
+    var postId = 1;
+    
+    // logic to get new data
+    var getDataTemperature = function() {
+      $.ajax({
+        url: 'http://93.188.166.97:3000/Vitalsigns/N/15',
+        success: function(data) {
+          
+          for (var i=0; i < 14; i++) {  
+            myChart_2.data.labels[i]  = data[i].id;
+            myChart_2.data.datasets[0].data[i] = data[i].temperature;
+            myChart_2.update();  
+          }
+          
+        }
+      });
+    };
+    
+    // get new data every 3 seconds
+    setInterval(getDataTemperature, 30);
+
+  </script>
+
+
+  </body>
+
+
+</html>
