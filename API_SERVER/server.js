@@ -84,22 +84,11 @@ app.post("/virtual_client_update",(req, res) => {
     res.send(client_credential[req.body.key]);
   });
 // routes
-//require("./app/routes/product.routes.js")(app);
-//require('./app/routes/auth.routes')(app);
-//require('./app/routes/user.routes')(app);
+
 require('./app/routes/participant.routes')(app);
 require('./app/routes/meeting_participant.routes')(app);
 require('./app/routes/meeting_record.routes')(app);
 require('./app/routes/meeting.routes')(app);
-
-//require('./app/routes/order.routes')(app);
-//require('./app/routes/type.routes')(app);
-//require('./app/routes/brand.routes')(app);
-//require('./app/routes/country.routes')(app);
-//require('./app/routes/fuel.routes')(app);
-//require('./app/routes/color.routes')(app);
-//require('./app/routes/transmission.routes')(app);
-//require('./app/routes/model.routes')(app);
 
 // set port, listen for requests
 app.listen(6080, () => {
